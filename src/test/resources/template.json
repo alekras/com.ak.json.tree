@@ -1,0 +1,34 @@
+[
+  {
+    "$template" : {
+      "$match" : "/", 
+      "$value" : {
+        "authors" : {"$apply-template" : {"$select" : "/book-store/*/book/author[last-name != preceding-sibling::last-name]"}},
+        "document_copy_of" : {"$copy-of" : {"$select" : "/for_coping"}}
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "book", 
+      "$value" : {
+        "book" : {
+          "title" : {"$value-of" : {"$select" : "title"}}
+        }
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "author",
+      "$variable" : {"$name" : "author", "$select" : "."}, 
+      "$value" : {
+        "author" : {
+          "name" : {"$value-of" : [{"$select" : "first-name"}, " ", {"$select" : "last-name"}]
+          },
+          "books" : {"$apply-template" : {"$select" : "/book-store/*/book[author = $author]"}}
+        }
+      }
+    }
+  }
+]

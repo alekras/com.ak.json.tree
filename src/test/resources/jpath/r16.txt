@@ -1,0 +1,6 @@
+"Adventures of Huckleberry Finn"
+{"first-name":"Mark","last-name":"Twain"}
+"Mark"
+"Twain"
+2.7
+1994

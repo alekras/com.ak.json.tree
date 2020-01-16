@@ -1,0 +1,4 @@
+"The Call of the Wild"
+{"first-name":"Jack","last-name":"London"}
+8.15
+2013

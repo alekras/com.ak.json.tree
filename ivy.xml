@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	<info
+		organisation="com.ak"
+		module="jsontree"
+		status="integration"
+		revision="1.0.0" >
+	</info>
+    <publications>
+        <artifact type="jar" />
+        <artifact name="jsontree-sources" type="src" ext="jar" />
+    </publications>
+	<dependencies>
+		<dependency org="log4j" name="log4j" rev="1.2.17" />
+		<dependency org="junit" name="junit" rev="4.12" />
+
+		<exclude org="javax.mail" module="mail" />
+		<exclude org="org.apache.openejb" module="javaee-api" />
+		<exclude org="org.apache.geronimo.specs" module="geronimo-jms_1.1_spec" />
+        
+	</dependencies>
+	
+</ivy-module>

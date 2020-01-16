@@ -1,0 +1,2 @@
+{"price":8.15,"amount":15,"author":"London"}
+{"price":17.45,"amount":15,"author":"King"}

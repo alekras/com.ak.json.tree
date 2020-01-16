@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="com.ak.json.tree" default="zip" basedir=".">
+
+  <property file="${basedir}/build.properties"/>
+
+  <target name="zip" description="zip project for download zip file">
+    <zip destfile="${basedir}/com.ak.json.tree-${module.version.target}.zip">
+      <fileset dir="${basedir}" casesensitive="yes">
+        <include name="doc/**/*"/>
+        <include name="src/**/*"/>
+        <include name=".project"/>
+        <include name=".classpath"/>
+        <include name=".settings/**/*"/>
+        <include name="build.*"/>
+        <include name="*.xml"/>
+        <include name="README.TXT"/>
+        <include name="maven-run.bat"/>
+
+      	<exclude name="*.zip"/>
+      </fileset>
+    </zip> 
+  </target>
+
+</project>

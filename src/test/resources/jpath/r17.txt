@@ -1,0 +1,1 @@
+{"title":"Joyland (Hard Case Crime)","author":{"first-name":"Stephen","last-name":"King"},"price":7.77,"year":2013}

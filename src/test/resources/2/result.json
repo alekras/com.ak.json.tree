@@ -1,0 +1,28 @@
+{
+  "authors":[
+    {
+      "author":{
+        "name":"Francis Scott Fitzgerald",
+        "books":[
+          {
+            "book":{
+              "title":"The Great Gatsby"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "author":{
+        "name":"Stephen King",
+        "books":[
+          {
+            "book":{
+              "title":"Joyland (Hard Case Crime)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

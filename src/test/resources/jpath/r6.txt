@@ -1,0 +1,4 @@
+{"title":"The Great Gatsby","author":{"first-name":"Francis Scott","last-name":"Fitzgerald"},"price":8.41,"year":2004}
+{"title":"Doctor Sleep: A Novel","author":{"first-name":"Stephen","last-name":"King"},"price":17.45,"year":2013}
+{"title":"The Call of the Wild","author":{"first-name":"Jack","last-name":"London"},"price":8.15,"year":2013}
+{"title":"Martin Eden","author":{"first-name":"Jack","last-name":"London"},"price":10.09,"year":1909}

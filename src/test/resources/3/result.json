@@ -1,0 +1,71 @@
+{
+  "authors":[
+    {
+      "author":{
+        "name":"Francis Scott Fitzgerald",
+        "books":[
+          {
+            "book":{
+              "title":"The Great Gatsby"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "author":{
+        "name":"Stephen King",
+        "books":[
+          {
+            "book":{
+              "title":"Joyland (Hard Case Crime)"
+            }
+          },
+          {
+            "book":{
+              "title":"Doctor Sleep: A Novel"
+            }
+          },
+          {
+            "book":{
+              "title":"Roadwork"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "author":{
+        "name":"Mark Twain",
+        "books":[
+          {
+            "book":{
+              "title":"Adventures of Huckleberry Finn"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "author":{
+        "name":"Jack London",
+        "books":[
+          {
+            "book":{
+              "title":"The Call of the Wild"
+            }
+          },
+          {
+            "book":{
+              "title":"Martin Eden"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "document_copy_of":{
+    "a":"value-a",
+    "b":"value-b"
+  }
+}

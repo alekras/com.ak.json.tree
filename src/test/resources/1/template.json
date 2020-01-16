@@ -1,0 +1,21 @@
+[
+  {
+    "$template" : {
+      "$match" : "/", 
+      "$value" : {
+        "s2" : [
+          {"$apply-template" : {"$select" : "/f2/2/f3", "$array" : false}},
+          {"$copy-of" : {"$select" : "/f2/2"}}
+        ]
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "f3",
+      "$value" : { 
+        "s1" : {"$copy-of" : {"$select" : "/f1"}}
+      }
+    }
+  }
+]

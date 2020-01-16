@@ -1,0 +1,45 @@
+{
+  "oses": [
+    ["Windows", 3], 
+    ["Linux", 1]
+  ], 
+  "end_date": "2014-05-12 00:00:00", 
+  "countries": [
+    ["China", 3], 
+    ["India", 1]
+  ], 
+  "oses_with_downloads": [
+    "Linux", 
+    "Windows"
+  ], 
+  "downloads": [
+    ["2014-05-02 00:00:00", 0], 
+    ["2014-05-03 00:00:00", 0], 
+    ["2014-05-04 00:00:00", 2], 
+    ["2014-05-05 00:00:00", 0], 
+    ["2014-05-06 00:00:00", 1], 
+    ["2014-05-07 00:00:00", 0], 
+    ["2014-05-08 00:00:00", 0], 
+    ["2014-05-09 00:00:00", 0], 
+    ["2014-05-10 00:00:00", 0], 
+    ["2014-05-11 00:00:00", 1], 
+    ["2014-05-12 00:00:00", 0],
+    null
+  ], 
+  "messages": [], 
+  "period": "daily", 
+  "start_date": "2014-05-02 00:00:00", 
+  "oses_by_country": {
+    "India": {"Linux": 1}, 
+    "China": {"Windows": 3}
+  }, 
+  "total": 4, 
+  "stats_updated": "2014-05-12 18:01:32", 
+  "summaries": {
+    "os": {"top": "Windows", "percent": 75, "modifier_text": ""}, 
+    "geo": {"top": "China", "percent": 75, "modifier_text": ""}, 
+    "time": {"downloads": 4}
+  },
+  "NULL": null
+}
+

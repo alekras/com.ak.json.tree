@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<book-store>
+  <book>
+    <title>The Great Gatsby</title>
+    <autor>
+      <first-name>F. Scott</first-name>
+      <last-name>Fitzgerald</last-name>
+    </autor>
+    <price>8.41</price>
+    <year>2004</year>
+  </book>
+  <book>
+    <title>Joyland (Hard Case Crime)</title>
+    <autor>
+      <first-name>Stephen</first-name>
+      <last-name>King</last-name>
+    </autor>
+    <price>7.77</price>
+    <year>2013</year>
+  </book>
+  <book>
+    <title>Doctor Sleep: A Novel</title>
+    <autor>
+      <first-name>Stephen</first-name>
+      <last-name>King</last-name>
+    </autor>
+    <price>17.45</price>
+    <year>2013</year>
+  </book>
+  <book>
+    <title>Adventures of Huckleberry Finn</title>
+    <autor>
+      <first-name>Mark</first-name>
+      <last-name>Twain</last-name>
+    </autor>
+    <price>2.70</price>
+    <year>1994</year>
+  </book>
+  <book>
+    <title>The Call of the Wild</title>
+    <autor>
+      <first-name>Jack</first-name>
+      <last-name>London</last-name>
+    </autor>
+    <price>8.15</price>
+    <year>2013</year>
+  </book>
+  <book>
+    <title>Martin Eden</title>
+    <autor>
+      <first-name>Jack</first-name>
+      <last-name>London</last-name>
+    </autor>
+    <price>10.09</price>
+    <year>1909</year>
+  </book>
+  <book>
+    <title>Roadwork</title>
+    <autor>
+      <first-name>Stephen</first-name>
+      <last-name>King</last-name>
+    </autor>
+    <price>7.19</price>
+    <year>2013</year>
+  </book>
+</book-store>

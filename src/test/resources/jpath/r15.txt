@@ -1,0 +1,7 @@
+{"title":"Adventures of Huckleberry Finn","author":{"first-name":"Mark","last-name":"Twain"},"price":2.7,"year":1994}
+"Adventures of Huckleberry Finn"
+{"first-name":"Mark","last-name":"Twain"}
+"Mark"
+"Twain"
+2.7
+1994

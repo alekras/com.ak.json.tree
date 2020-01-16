@@ -1,0 +1,4 @@
+{"first-name":"Francis Scott","last-name":"Fitzgerald"}
+{"first-name":"Stephen","last-name":"King"}
+{"first-name":"Mark","last-name":"Twain"}
+{"first-name":"Jack","last-name":"London"}

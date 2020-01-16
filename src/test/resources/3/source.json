@@ -1,0 +1,81 @@
+{"book-store" : [
+  {
+    "book" : {
+      "title": "The Great Gatsby",
+      "author" : {
+        "first-name" : "Francis Scott",
+        "last-name" : "Fitzgerald"
+      },
+      "price" : 8.41,
+      "year" : 2004
+    }
+  },
+  {
+    "book" : {
+      "title" : "Joyland (Hard Case Crime)",
+      "author" : {
+        "first-name" : "Stephen",
+        "last-name" : "King"
+      },
+      "price" : 7.77,
+      "year" : 2013
+    }
+  },
+  {
+    "book" : {
+      "title" : "Doctor Sleep: A Novel",
+      "author" : {
+        "first-name" : "Stephen",
+        "last-name" : "King"
+      },
+      "price" : 17.45,
+      "year" : 2013
+    }
+  },
+  {
+    "book" : {
+      "title" : "Adventures of Huckleberry Finn",
+      "author" : {
+        "first-name" : "Mark",
+        "last-name" : "Twain"
+      },
+      "price" : 2.71,
+      "year" : 1994
+    }
+  },
+  {
+    "book" : {
+      "title" : "The Call of the Wild",
+      "author" : {
+        "first-name" : "Jack",
+        "last-name" : "London"
+      },
+      "price" : 8.15,
+      "year" : 2013
+    }
+  },
+  {
+    "book" : {
+      "title" : "Martin Eden",
+      "author" : {
+        "first-name" : "Jack",
+        "last-name" : "London"
+      },
+      "price" : 10.09,
+      "year" : 1909
+    }
+  },
+  {
+    "book" : {
+      "title" : "Roadwork",
+      "author" : {
+        "first-name" : "Stephen",
+        "last-name" : "King"
+      },
+      "price" : 7.19,
+      "year" : 2013
+    }
+  }
+],
+"for_coping" : {"a" : "value-a", "b" : "value-b"}
+}

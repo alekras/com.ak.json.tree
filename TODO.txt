@@ -1,0 +1,5 @@
++ 1. absolute/relative path /a/b/e, /pr::a/b/c  and so on see JPath.getNodesFromOperand()
+? 2. Do I need path property at all?
++ 3. matchTemplate and $template.$match have to use composed path like: book/author/name
+4. check: if all nodes cloned from source during transformation?
+5. new tests for 1 and 3

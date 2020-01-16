@@ -1,0 +1,7 @@
+
+<project name="jsontree" default="compile" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property file="build.properties"/>
+	
+	<import file="${common.dir}/common.xml"/>
+
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<_root>
+  <f1>val_1</f1>
+  <f2>
+    <_a>1</_a>
+    <_a>2</_a>
+    <_a>
+      <f3>
+        <f4>val_4</f4>
+        <f5>val_5</f5>
+      </f3>
+      <f6>val_6</f6>
+    </_a>
+  </f2>
+</_root>

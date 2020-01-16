@@ -1,0 +1,82 @@
+<authors xmlns:fn="http://www.w3.org/2005/xpath-functions">
+<autor>
+<name>F. Scott Fitzgerald</name>
+<books>
+<book>
+<title>The Great Gatsby</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Stephen King</name>
+<books>
+<book>
+<title>Joyland (Hard Case Crime)</title>
+</book>
+<book>
+<title>Doctor Sleep: A Novel</title>
+</book>
+<book>
+<title>Roadwork</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Stephen King</name>
+<books>
+<book>
+<title>Joyland (Hard Case Crime)</title>
+</book>
+<book>
+<title>Doctor Sleep: A Novel</title>
+</book>
+<book>
+<title>Roadwork</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Mark Twain</name>
+<books>
+<book>
+<title>Adventures of Huckleberry Finn</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Jack London</name>
+<books>
+<book>
+<title>The Call of the Wild</title>
+</book>
+<book>
+<title>Martin Eden</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Jack London</name>
+<books>
+<book>
+<title>The Call of the Wild</title>
+</book>
+<book>
+<title>Martin Eden</title>
+</book>
+</books>
+</autor>
+<autor>
+<name>Stephen King</name>
+<books>
+<book>
+<title>Joyland (Hard Case Crime)</title>
+</book>
+<book>
+<title>Doctor Sleep: A Novel</title>
+</book>
+<book>
+<title>Roadwork</title>
+</book>
+</books>
+</autor>
+</authors>

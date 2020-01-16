@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="package" 
+    	    author="true"
+        	classpath="" 
+        	destdir="doc" 
+        	nodeprecated="false" 
+        	nodeprecatedlist="false" 
+        	noindex="false" 
+        	nonavbar="false" 
+        	notree="false" 
+        	overview="${basedir}/src/main/java/overview.html" 
+        	packagenames="com.ak.json,com.ak.json.nodetree,com.ak.json.transform" 
+        	source="1.7" 
+        	sourcefiles="" 
+        	sourcepath="src/main/java" 
+        	splitindex="true" 
+        	use="true" 
+        	version="true"/>
+      <copy file="${basedir}/src/main/resources/json_node_tree_classes_new.png" tofile="${basedir}/doc/resources/json_node_tree_classes_new.png" overwrite="true"/>
+      <copy file="${basedir}/src/main/resources/json_node_tree_2.png" tofile="${basedir}/doc/resources/json_node_tree_2.png" overwrite="true"/>
+      <copy file="${basedir}/src/main/resources/json_node_tree_3.png" tofile="${basedir}/doc/resources/json_node_tree_3.png" overwrite="true"/>
+    	<!-- add meta tags -->
+    <replace dir="${basedir}/doc" includes="*.html">
+      <replacetoken><![CDATA[<title>]]></replacetoken>
+      <replacevalue>
+      	<![CDATA[<meta name="keywords" content="Java, JSON, parse, parsing, json parsing, transform, transformation, json transformation, json path, node tree, library." />
+        <meta name="description" content="Java library for JSON parsing and transformation." />
+        <title>]]>
+      </replacevalue>
+    </replace>
+  </target>
+	<target name="scp" description="scp -r * krasnopolski,jsonnodetree@web.sourceforge.net:htdocs" id="cd to doc, need to set ssh key">
+	</target>
+</project>

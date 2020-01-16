@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html>
+<style type="text/css">
+table.reference,table.tecspec{
+  border-collapse:collapse;width:100%;
+}
+
+table.reference tr:nth-child(odd) {background-color:#f1f1f1;}
+table.reference tr:nth-child(even)  {background-color:#ffffff;}
+
+table.reference tr.fixzebra     {background-color:#f1f1f1;}
+
+table.reference th{
+  color:#ffffff;background-color:#555555;border:1px solid #555555;padding:3px;vertical-align:top;text-align:left;
+}
+
+table.reference th a:link,table.reference th a:visited{
+  color:#ffffff;
+}
+
+table.reference th a:hover,table.reference th a:active{
+  color:#EE872A;
+}
+
+table.reference td{
+  border:1px solid #d4d4d4;padding:5px;padding-top:7px;padding-bottom:7px;vertical-align:top;
+}
+
+table.reference td.example_code
+{
+vertical-align:bottom;
+}
+</style>    
+
+<body>
+<h3>Introduction</h3>
+<p>
+    Jsonnodetree is library that is parsing JSON textual document to tree of a nodes, each of them represents JSON entity: object, 
+    array or value of primitive type. Generated tree allows to modify values of nodes and/or structure of the given JSON 
+    document. The library is extended with set of operations with paths and transformations 
+    similar XPATH and XSLT for XML.
+</p>
+<h3>Getting started</h3>
+<p>
+    Assume we have a JSON document in file phones.json:
+</p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ {
+   "name": "John",
+   "age": 25,
+   "address": {
+     "street": "15, Main St.",
+     "city": "Bloomington",
+     "state": "Texas"
+   },
+   "phones": [
+     4143456798,
+     7189151248,
+     {
+       "type": "office",
+       "number": 7189257336
+     }
+   ]
+ }
+  </code></pre>
+    To parse this document to node tree we have to write code:
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ JNode docTree = new com.ak.json.transform.JParser().parse(new File("phones.json"));
+  </code></pre>
+<p>
+    The JSON parser converts textual presentation of the document to a tree of nodes:
+</p>
+
+  <img src="resources/json_node_tree_3.png">
+
+  <p>
+    Result of parsing is a tree of nodes as a next figure showed:
+  </p>
+
+    <img src="resources/json_node_tree_2.png">
+
+  <p>
+    Node type JNodeObject represents JSON object (f.e. {"street": "15, Main St.", "city": "Bloomington", "state": "Texas"}).<br/> 
+    JNodeArray nodes represent JSON arrays (f.e. [4143456798, 7189151248, "comcast"]).<br/> 
+    JNodeValue nodes represent JSON primitive values like string, integer number, float number, boolean and null. 
+  </p>
+  <p>
+    Class diagram of the library is showed below. Interface <code>Node</code> represents all common operation under nodes tree.
+  </p>
+
+  <img src="resources/json_node_tree_classes_new.png">
+<p></p>
+<h5>Find and Get nodes</h5>
+  <p>
+  <pre style="background-color: aqua;overflow: visible;auto;"><code>
+ docTree.get("age").getValue(Integer.class));                  // == 25
+ docTree.get("phones").get(0).getValue(Long.class));           // == 4143456798l
+ docTree.get("address");                                       // == JObjectNode represents "{"street":"15, Main St.","city": "Bloomington","state": "Texas"}") 
+ docTree.get("address").get("street");                         // == JValueNode&lt;String&gt; represents "15, Main St.", 
+ docTree.get("address").get("street").getValue(String.class)); // == "15, Main St."
+  </code></pre>
+  </p>
+
+<h5>Change value</h5>
+  <p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ JValueNode&lt;Object&gt; changedNode = (JValueNode&lt;Object&gt;) docTree.get("age"); // changedNode represents 25
+ changedNode.setValue(new Integer(27));                                    // now changedNode represents 27
+  </code></pre>
+  </p>
+
+<h5>Add nodes</h5>
+  <p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ JArrayNode changedNode = (JArrayNode) docTree.get("phones"); // changedNode represents [4143456798,7189151248,{"type":"office","number": 7189257336}]
+ changedNode.addElement(new JValueNode(4043242668L));         // now changedNode represents [4143456798,7189151248,{"type":"office","number": 7189257336},4043242668]
+  </code></pre>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ JObjectNode changedNode = (JObjectNode) docTree.get("address"); // changedNode represents {"street":"15, Main St.","city":"Bloomington","state":"Texas"}
+ changedNode.addElement("zip code", new JValueNode(33024));      // now changedNode represents {"street":"15, Main St.","city":"Bloomington","state":"Texas"."zip code":"33024"}
+  </code></pre>
+  </p>
+
+<h5>Remove nodes</h5>
+  <p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ ((JObjectNode) docTree).removeElement("name");
+ docTree.get("name")); // == null
+  </code></pre>
+  </p>
+
+<!-- <h5></h5>
+  <p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+  </code></pre>
+  </p>
+ -->
+ 
+<h3>JPath</h3>
+<p>
+    JPah has a purposes, notation and functionality similar XPATH. With JPath we can issue requests to search and extract nodes from node tree:
+</p>
+  <pre style="background-color: aqua;overflow:auto;"><code>
+ List<JNode> result = JPath.jpath("/address/street", docTree); // == [JValueNode<String> -> "15, Main St."] 
+  </code></pre>
+    To show all power of JPath we need more composite JSON document for examples. Imagine it keeps in book_store.json file:
+  <pre style="background-color: aqua;overflow:auto;"><code>
+{"book-store": [
+  {"book": {"title": "The Great Gatsby", "author": {"first-name": "Francis Scott", "last-name": "Fitzgerald"},
+            "price": 8.41, "year": 2004}},
+  {"book": {"title": "Joyland (Hard Case Crime)", "author": {"first-name": "Stephen", "last-name": "King"},
+            "price": 7.77, "year": 2013}},
+  {"book": {"title": "Doctor Sleep: A Novel", "author": {"first-name": "Stephen", "last-name": "King"},
+            "price": 17.45, "year": 2013}},
+  {"book": {"title": "Adventures of Huckleberry Finn", "author": {"first-name": "Mark", "last-name": "Twain"},
+            "price": 2.70, "year": 1994}},
+  {"book": {"title": "The Call of the Wild", "author": {"first-name": "Jack", "last-name": "London"},
+            "price": 8.15, "year": 2013}},
+  {"book": {"title": "Martin Eden", "author": {"first-name": "Jack", "last-name": "London"},
+            "price": 10.09, "year": 1909}},
+  {"book": {"title": "Roadwork", "author": {"first-name": "Stephen", "last-name": "King"},
+            "price": 7.19, "year": 2013}}
+]}
+  </code></pre>
+    First at all convert Json document to node tree:
+    <pre style="background-color: aqua;overflow:auto;"><code>
+ JNode bookStore = parser.parse(new File("book_store.json"));    
+    </code></pre>
+Now try to extract from book store all book titles (nodes named "title"):
+    <pre style="background-color: aqua;overflow:auto;"><code>
+ List<JNode> result = JPath.jpath("/book-store/*/book/title", bookStore); 
+    </code></pre>
+If we print out result
+    <pre style="background-color: aqua;overflow:auto;"><code>
+ for (JNode nd : result) {
+   System.out.println(nd.toJson());
+ }
+  </code></pre>
+we get result in as a text values of json fields "title" like this:
+    <pre style="background-color: aqua; overflow: auto;"><code>
+ "The Great Gatsby"
+ "Joyland (Hard Case Crime)"
+ "Doctor Sleep: A Novel"
+ "Adventures of Huckleberry Finn"
+ "The Call of the Wild"
+ "Martin Eden"
+ "Roadwork"
+  </code></pre>
+Json path expression mostly looks like XPath expressions. 
+A location json path expression consists of one or more steps, each separated by a slash.
+    <pre style="background-color: aqua;overflow:auto;"><code>
+ /step1/step2/ ...
+    </code></pre>
+The path can be absolute (starting with /) or relative (without leading /).
+Each step is evaluated against the nodes in the current node-set.
+
+A step consists of:
+
+<ul>
+  <li>an axis (defines the tree-relationship between the selected nodes and the current node)</li>
+  <li>a node-test (identifies a node within an axis)</li>
+  <li>zero or one predicate (to further refine the selected node-set)</li>
+</ul>
+
+The syntax for a location step is:
+    <pre style="background-color: aqua;overflow:auto;"><code>
+ axisname::nodetest[predicate]
+    </code></pre>
+<p>
+<table class="reference" title="JPath axes"> <caption style="font-weight:bold;text-align:left;">JPath axes: an axis defines a node-set relative to the current node.</caption>
+  <tr>
+    <th style="width:38%">Axis Name</th><th style="width:62%">Result</th>
+  </tr>
+  <tr>
+    <td>ancestor</td><td>Selects all ancestors (parent, grandparent, etc.) of the current node</td>
+  </tr>
+  <tr>
+    <td>ancestor-or-self</td><td>Selects all ancestors (parent, grandparent, etc.) of the current node and the current node itself</td>
+  </tr>
+  <tr>
+    <td>child</td><td>Selects all children of the current node</td>
+  </tr>
+  <tr>
+    <td>descendant</td><td>Selects all descendants (children, grandchildren, etc.) of the current node</td>
+  </tr>
+  <tr>
+    <td>descendant-or-self</td><td>Selects all descendants (children, grandchildren, etc.) of the current node and the current node itself</td>
+  </tr>
+  <tr>
+    <td>following-sibling</td><td>Selects all siblings after the current node</td>
+  </tr>
+  <tr>
+    <td>parent</td><td>Selects the parent of the current node</td>
+  </tr>
+  <tr>
+    <td>preceding-sibling</td><td>Selects all siblings before the current node</td>
+  </tr>
+  <tr>
+    <td>self</td><td>Selects the current node</td>
+  </tr>
+</table>
+</p>
+<p>
+<table class="reference" title="Node test"><caption style="font-weight:bold;text-align:left;">Node test</caption>
+  <tr>
+    <th style="width:25%">Expression</th><th>Description</th>
+  </tr>
+  <tr>
+    <td><i>nodename</i></td><td>Selects all nodes with the name &quot;<i>nodename</i>&quot;</td>
+    </tr>
+  <tr>
+    <td>/</td><td>Selects from the root node</td>
+    </tr>
+  <tr>
+    <td>//</td><td>Selects nodes in the document from the current node that match the selection no matter where they are </td>
+  </tr>
+  <tr>
+    <td>.</td><td>Selects the current node</td>
+  </tr>
+  <tr>
+    <td>..</td><td>Selects the parent of the current node</td>
+  </tr>
+  <tr>
+    <td>*</td><td>Selects any nodes</td>
+  </tr>
+  <tr>
+    <td>integer number</td><td>Selects node from array by the index</td>
+  </tr>
+</table>
+</p>
+    <h3>Json transformation</h3>
+<p>
+Json Node Tree framework allows transformation of JSON object like XSL transformation XML documents. Suppose we have initial document: 
+    <pre style="background-color: aqua;overflow:auto;"><code>
+{"book-store" : [
+  {
+    "book" : {
+      "title": "The Great Gatsby",
+      "author" : {
+        "first-name" : "Francis Scott",
+        "last-name" : "Fitzgerald"
+      },
+      "price" : 8.41,
+      "year" : 2004
+    }
+  },
+  {
+    "book" : {
+      "title" : "Joyland (Hard Case Crime)",
+      "author" : {
+        "first-name" : "Stephen",
+        "last-name" : "King"
+      },
+      "price" : 7.77,
+      "year" : 2013
+    }
+  }]
+}
+    </code></pre>
+Json document named 'template' defines transformation we want to apply to original document:
+    <pre style="background-color: aqua;overflow:auto;"><code>
+[
+  {
+    "$template" : {
+      "$match" : "/", 
+      "$value" : {
+        "authors" : {"$apply-template" : {"$select" : "/book-store/*[not(book/author/last-name = preceding-sibling::book/author/last-name)]/book/author"}}
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "book", 
+      "$value" : {
+        "book" : {
+          "title" : {"$value-of" : {"$select" : "title"}}
+        }
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "author",
+      "$variable" : {"$name" : "author", "$select" : "."}, 
+      "$value" : {
+        "author" : {
+          "name" : {"$value-of" : [{"$select" : "first-name"}, " ", {"$select" : "last-name"}]
+          },
+          "books" : {"$apply-template" : {"$select" : "/book-store/*/book[author = $author]"}}
+        }
+      }
+    }
+  }
+]
+    </code></pre>
+Result the transformation is following:
+    <pre style="background-color: aqua;overflow:auto;"><code>
+{
+  "authors":[
+    {
+      "author":{
+        "name":"Francis Scott Fitzgerald",
+        "books":[
+          {
+            "book":{
+              "title":"The Great Gatsby"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "author":{
+        "name":"Stephen King",
+        "books":[
+          {
+            "book":{
+              "title":"Joyland (Hard Case Crime)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+    </code></pre>
+  </p>
+Json templates document is analog of XML stylesheet document (usually .xsl file) &lt;xsl:stylesheet&gt;&lt;/xsl:stylesheet&gt;. It is Json array of
+template objects:
+    <pre style="background-color: aqua;overflow:auto;"><code>
+{
+  "$template": {
+    "$match": {},
+    "$value": {}.
+    "$variable": {}
+  }
+} </code></pre>
+
+<p>
+<table class="reference" title="Transformation template tags"><caption style="font-weight:bold;text-align:left;">Transformation template tags</caption>
+  <tr>
+    <th style="width:25%">Template tag (Json)</th><th>XSLT analog</th><th>Description</th>
+  </tr>
+  <tr>
+    <td>$<i>template</i></td>
+    <td><i>&lt;xsl:template&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>apply-template</i></td>
+    <td><i>&lt;xsl:apply-templates&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>match</i></td>
+    <td><i>&lt;xsl:template match=pattern&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>select</i></td>
+    <td><i>&lt;xsl:apply-templates select=expression&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>value-of</i></td>
+    <td><i>&lt;xsl:value-of select=expression&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>value</i></td>
+    <td><i></i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>variable</i></td>
+    <td><i>&lt;xsl:variable&gt;</i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>name</i></td>
+    <td><i></i></td>
+    <td>&quot;<i></i>&quot;</td>
+  </tr>
+  <tr>
+    <td>$<i>_variable_name_</i></td>
+    <td>&quot;_variable_name_&quot;</td>
+    <td>&quot;<i>_variable_name_</i>&quot;</td>
+  </tr>
+</table>
+</p>
+  </body>
+</html>
