@@ -373,15 +373,16 @@ public final class JPath {
         if (val1 instanceof String && val2 instanceof String) {
           comparison = ((String) val1).compareTo((String) val2);
         } else if (val1 instanceof Number && val2 instanceof Number) {
-          if (val1 instanceof Integer && val2 instanceof Integer) {
-            comparison = ((Integer) val1).compareTo((Integer) val2);
-          } else if (val1 instanceof Float && val2 instanceof Float) {
-            comparison = ((Float) val1).compareTo((Float) val2);
-          } else if (val1 instanceof Integer && val2 instanceof Float) {
-            comparison = new Float(((Integer) val1).floatValue()).compareTo((Float) val2);
-          } else if (val1 instanceof Float && val2 instanceof Integer) {
-            comparison = ((Float) val1).compareTo(new Float(((Integer) val2).floatValue()));
-          }
+//          if (val1 instanceof Integer && val2 instanceof Integer) {
+//            comparison = ((Integer) val1).compareTo((Integer) val2);
+//          } else if ((val1 instanceof Float || val1 instanceof Double) && (val2 instanceof Float || val2 instanceof Double)) {
+//            comparison = ((Double) val1).compareTo((Double) val2);
+//          } else if (val1 instanceof Integer && (val2 instanceof Float || val2 instanceof Double)) {
+//            comparison = new Double(((Integer) val1).doubleValue()).compareTo((Double) val2);
+//          } else if ((val1 instanceof Float || val1 instanceof Double) && val2 instanceof Integer) {
+//            comparison = ((Double) val1).compareTo(new Double(((Integer) val2).doubleValue()));
+//          }
+          comparison = convert2Double(val1).compareTo(convert2Double(val2));
         } else {
           // TODO throw exception
         }
@@ -434,6 +435,17 @@ public final class JPath {
     return false;
   }
 
+  private static Double convert2Double(Object v) {
+    if (v instanceof Integer) {
+      return new Double(((Integer) v).doubleValue());
+    } else if (v instanceof Float) {
+      return new Double(((Float) v).doubleValue());
+    } else if (v instanceof Double) {
+      return (Double) v;
+    } else {
+      return new Double(((Number)v).doubleValue());
+    }
+  }
   /**
    *
    * @param fun function
