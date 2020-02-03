@@ -12,7 +12,7 @@
         	notree="false" 
         	overview="${basedir}/src/main/java/overview.html" 
         	packagenames="com.ak.json,com.ak.json.nodetree,com.ak.json.transform" 
-        	source="1.7" 
+        	source="1.8" 
         	sourcefiles="" 
         	sourcepath="src/main/java" 
         	splitindex="true" 

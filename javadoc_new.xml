@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+	<target name="javadoc">
+		<javadoc access="package" author="true"
+			classpath="C:\Users\krasal5\Applications\eclipse_4.14\plugins\org.junit_4.12.0.v201504281640\junit.jar;target/test-classes;C:\Users\krasal5\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\krasal5\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\krasal5\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\krasal5\Applications\eclipse_4.14\plugins\org.hamcrest.core_1.3.0.v20180420-1519.jar"
+			destdir="doc" nodeprecated="false" nodeprecatedlist="false"
+			noindex="false" nonavbar="false" notree="false"
+			overview="C:\Users\krasal5\git\git\src\main\java\overview.html"
+			packagenames="com.ak.json.nodetree" source="1.8"
+			sourcefiles="src/main/java/com/ak/json/JParserException.java,src/main/java/com/ak/json/JInstrumentalNode.java,src/main/java/com/ak/json/transform/JPath.java,src/main/java/com/ak/json/JParseEvent.java,src/main/java/com/ak/json/transform/JParser.java,src/main/java/com/ak/json/transform/JTransformer.java,src/main/java/com/ak/json/JNode.java"
+			sourcepath="src/main/resources;src/test/java;src/test/resources;src/main/java"
+			splitindex="true" use="true" version="true" />
+	</target>
+</project>
