@@ -34,7 +34,17 @@ public enum JValueType {
   INTEGER,
 
   /**
-   * Value type is Float or Double class instance.
+   * Value type is Long class instance.
+   */
+  LONG,
+
+  /**
+   * Value type is Double class instance.
+   */
+  DOUBLE,
+
+  /**
+   * Value type is Float class instance.
    */
   FLOAT,
 
