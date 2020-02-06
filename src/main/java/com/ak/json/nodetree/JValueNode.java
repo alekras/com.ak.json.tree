@@ -25,152 +25,205 @@ import com.ak.json.JNode;
  *
  */
 public class JValueNode<V> extends AbstractJNode {
-  /** Value of this simple node. */
-  private V primitiveValue;
+	/** Value of this simple node. */
+	private V primitiveValue;
 
-  /**
-   * Default constructor for detached node.
-   */
-  public JValueNode() {
-    super(null);
-    init();
-  }
+	private JValueType valueType;
 
-  /**
-   * Constructor for detached node.
-   * @param val value of the node.
-   */
-  public JValueNode(final V val) {
-    this();
-    setValue(val);
-  }
+	/**
+	 * Default constructor for detached node.
+	 */
+	public JValueNode() {
+		super(null);
+		init();
+	}
 
-  /**
-   * Constructor for node attached to tree.
-   * @param fParent parent node in tree.
-   */
-  public JValueNode(final JNode fParent) {
-    super(fParent);
-    init();
-  }
+	/**
+	 * Constructor for detached node.
+	 * @param val value of the node.
+	 */
+	public JValueNode(final V val) {
+		this();
+		setValue(val);
+	}
 
-  /**
-   * Constructor for node attached to tree.
-   * @param fParent parent node in tree.
-   * @param val value of the node.
-   */
-  public JValueNode(final JNode fParent, final V val) {
-    this(fParent);
-    setValue(val);
-  }
+	/**
+	 * Constructor for node attached to tree.
+	 * @param fParent parent node in tree.
+	 */
+	public JValueNode(final JNode fParent) {
+		super(fParent);
+		init();
+	}
 
-  /**
-   * Initiation of the node.
-   */
-  private void init() {
-    type = JNodeType.VALUE;
-  }
+	/**
+	 * Constructor for node attached to tree.
+	 * @param fParent parent node in tree.
+	 * @param val value of the node.
+	 */
+	public JValueNode(final JNode fParent, final V val) {
+		this(fParent);
+		setValue(val);
+	}
 
-  @Override
-  public JNode clone() {
-    JValueNode<V> copy = new JValueNode<V>(parent);
-    copy.setValue(primitiveValue);
-    copy.setKey(getKey());
-    return copy;
-  }
+	/**
+	 * Initiation of the node.
+	 */
+	private void init() {
+		type = JNodeType.VALUE;
+	}
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public V getValue() {
-    return primitiveValue;
-  }
+	@Override
+	public JNode clone() {
+		JValueNode<V> copy = new JValueNode<V>(parent);
+		copy.setValue(primitiveValue);
+		copy.setKey(getKey());
+		return copy;
+	}
 
-  @Override
-  public <V1> V1 getValue(final Class<V1> pType) {
-    return pType.cast(primitiveValue);
-  }
+	@SuppressWarnings("unchecked")
+	@Override
+	public V getValue() {
+		return primitiveValue;
+	}
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public <V1> void setValue(final V1 value) {
-    this.primitiveValue = (V) value;
-  }
+	@Override
+	public <V1> V1 getValue(final Class<V1> pType) {
+		switch (pType.getSimpleName()) {
 
-  @Override
-  public <T> JNode getNode(final T selector) {
-    throw new RuntimeException("Try to get node from " + this.type + " node.");
-  }
+		case "Boolean" :
+			switch (valueType) {
+			case BOOLEAN :
+				return pType.cast(primitiveValue);
+			case STRING :
+				return (V1) Boolean.valueOf((String) primitiveValue);
+			default :
+				return null;
+			}
 
-  @Override
-  public <K, T extends JNode> void addNode(final K idx, final T node) {
-    throw new RuntimeException("Try to add node to " + this.type + " node.");
-  }
+		case "String" :
+			switch (valueType) {
+			case STRING :
+				return pType.cast(primitiveValue);
+			default :
+				return (V1) String.valueOf(primitiveValue);
+			}
 
-  @Override
-  public void addNode(final JNode node) {
-    throw new RuntimeException("Try to add node to " + this.type + " node.");
-  }
+		case "Integer" :
+			break;
 
-  @Override
-  public <T> void removeNode(final T selector) {
-    throw new RuntimeException("Try to remove node from " + this.type + " node.");
-  }
+		case "Long" :
+			break;
 
-  @Override
-  public <N extends JNode> void removeNode(final N node) {
-    throw new RuntimeException("Try to remove node from " + this.type + " node.");
-  }
+		case "Float" :
+			break;
 
-  @Override
-  public String toString() {
-    return toString("", false, true);
-  }
+		case "Double" :
+			break;
 
-  @Override
-  public String toString(final String indent, final boolean showPath, final boolean deep) {
-    return toJson();
-  }
+		default :
+			break;
+		}
 
-  @Override
-  public String toJson() {
-    if (primitiveValue == null) {
-      return "null";
-    }
-    if (primitiveValue instanceof String) {
-      return "\"" + primitiveValue.toString() + "\"";
-    }
-    return String.valueOf(primitiveValue);
-  }
+		return pType.cast(primitiveValue);
+	}
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((primitiveValue == null) ? 0 : primitiveValue.hashCode());
-    return result;
-  }
+	@SuppressWarnings("unchecked")
+	@Override
+	public <V1> void setValue(final V1 value) {
+		if (value instanceof Boolean) {
+			valueType = JValueType.BOOLEAN;
+		} else if (value instanceof String) {
+			valueType = JValueType.STRING;
+		} else if (value instanceof Integer) {
+			valueType = JValueType.INTEGER;
+		} else if (value instanceof Long) {
+			valueType = JValueType.LONG;
+		} else if (value instanceof Float) {
+			valueType = JValueType.FLOAT;
+		} else if (value instanceof Double) {
+			valueType = JValueType.DOUBLE;
+		} else if (value == null) {
+			valueType = JValueType.NULL;
+		}
+		this.primitiveValue = (V) value;
+	}
 
-  @Override
-  public boolean equals(final Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (!super.equals(obj)) {
-      return false;
-    }
-    if (!(obj instanceof JValueNode)) {
-      return false;
-    }
-    @SuppressWarnings("unchecked")
-    JValueNode<V> other = (JValueNode<V>) obj;
-    if (primitiveValue == null) {
-      if (other.primitiveValue != null) {
-        return false;
-      }
-    } else if (!primitiveValue.equals(other.primitiveValue)) {
-      return false;
-    }
-    return true;
-  }
+	@Override
+	public <T> JNode getNode(final T selector) {
+		throw new RuntimeException("Try to get node from " + this.type + " node.");
+	}
+
+	@Override
+	public <K, T extends JNode> void addNode(final K idx, final T node) {
+		throw new RuntimeException("Try to add node to " + this.type + " node.");
+	}
+
+	@Override
+	public void addNode(final JNode node) {
+		throw new RuntimeException("Try to add node to " + this.type + " node.");
+	}
+
+	@Override
+	public <T> void removeNode(final T selector) {
+		throw new RuntimeException("Try to remove node from " + this.type + " node.");
+	}
+
+	@Override
+	public <N extends JNode> void removeNode(final N node) {
+		throw new RuntimeException("Try to remove node from " + this.type + " node.");
+	}
+
+	@Override
+	public String toString() {
+		return toString("", false, true);
+	}
+
+	@Override
+	public String toString(final String indent, final boolean showPath, final boolean deep) {
+		return toJson();
+	}
+
+	@Override
+	public String toJson() {
+		if (primitiveValue == null) {
+			return "null";
+		}
+		if (primitiveValue instanceof String) {
+			return "\"" + primitiveValue.toString() + "\"";
+		}
+		return String.valueOf(primitiveValue);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((primitiveValue == null) ? 0 : primitiveValue.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof JValueNode)) {
+			return false;
+		}
+		@SuppressWarnings("unchecked")
+		JValueNode<V> other = (JValueNode<V>) obj;
+		if (primitiveValue == null) {
+			if (other.primitiveValue != null) {
+				return false;
+			}
+		} else if (!primitiveValue.equals(other.primitiveValue)) {
+			return false;
+		}
+		return true;
+	}
 
 }
