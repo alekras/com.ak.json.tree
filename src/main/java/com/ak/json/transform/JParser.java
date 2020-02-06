@@ -481,8 +481,8 @@ public class JParser {
         default:
           if (jp.value.matches("^[\\-\\+]?\\d+$")) {
             try {
-              JValueNode<Integer> vv = new JValueNode<Integer>();
-              vv.setValue(Integer.valueOf(jp.value));
+              JValueNode<Integer> vv = new JValueNode<Integer>(Integer.valueOf(jp.value));
+              //vv.setValue(Integer.valueOf(jp.value));
               value = vv;
             } catch (NumberFormatException e) {
               try {
