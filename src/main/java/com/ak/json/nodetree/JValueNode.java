@@ -87,6 +87,7 @@ public class JValueNode<V> extends AbstractJNode {
 		return primitiveValue;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <V1> V1 getValue(final Class<V1> pType) {
 		switch (pType.getSimpleName()) {
@@ -110,16 +111,100 @@ public class JValueNode<V> extends AbstractJNode {
 			}
 
 		case "Integer" :
-			break;
+			switch (valueType) {
+			case BOOLEAN :
+				return null;
+			case STRING :
+				try {
+					return (V1) Integer.valueOf((String) primitiveValue);
+				} catch (NumberFormatException e) {
+					return null;
+				}
+			case INTEGER :
+				return (V1) primitiveValue;
+			case LONG :
+				return (V1) Integer.valueOf(((Long) primitiveValue).intValue());
+			case FLOAT :
+				return (V1) Integer.valueOf(((Float) primitiveValue).intValue());
+			case DOUBLE :
+				return (V1) Integer.valueOf(((Double) primitiveValue).intValue());
+			case NULL :
+				return null;
+			default :
+				return null;
+			}
 
 		case "Long" :
-			break;
+			switch (valueType) {
+			case BOOLEAN :
+				return null;
+			case STRING :
+				try {
+					return (V1) Long.valueOf((String) primitiveValue);
+				} catch (NumberFormatException e) {
+					return null;
+				}
+			case INTEGER :
+				return (V1) Long.valueOf(((Integer) primitiveValue).intValue());
+			case LONG :
+				return (V1) primitiveValue;
+			case FLOAT :
+				return (V1) Long.valueOf(((Float) primitiveValue).intValue());
+			case DOUBLE :
+				return (V1) Long.valueOf(((Double) primitiveValue).intValue());
+			case NULL :
+				return null;
+			default :
+				return null;
+			}
 
 		case "Float" :
-			break;
+			switch (valueType) {
+			case BOOLEAN :
+				return null;
+			case STRING :
+				try {
+					return (V1) Float.valueOf((String) primitiveValue);
+				} catch (NumberFormatException e) {
+					return null;
+				}
+			case INTEGER :
+				return (V1) Float.valueOf(((Integer) primitiveValue).floatValue());
+			case LONG :
+				return (V1) Float.valueOf(((Long) primitiveValue).floatValue());
+			case FLOAT :
+				return (V1) primitiveValue;
+			case DOUBLE :
+				return (V1) Float.valueOf(((Double) primitiveValue).floatValue());
+			case NULL :
+				return null;
+			default :
+				return null;
+			}
 
 		case "Double" :
-			break;
+			switch (valueType) {
+			case BOOLEAN :
+				return null;
+			case STRING :
+				try {
+					return (V1) Double.valueOf((String) primitiveValue);
+				} catch (NumberFormatException e) {
+					return null;
+				}
+			case INTEGER :
+				return (V1) Double.valueOf(((Integer) primitiveValue).doubleValue());
+			case LONG :
+				return (V1) Double.valueOf(((Long) primitiveValue).doubleValue());
+			case FLOAT :
+				return (V1) Double.valueOf(((Float) primitiveValue).doubleValue());
+			case DOUBLE :
+				return (V1) primitiveValue;
+			case NULL :
+				return null;
+			default :
+				return null;
+			}
 
 		default :
 			break;

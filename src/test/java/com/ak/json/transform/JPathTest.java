@@ -69,8 +69,10 @@ public class JPathTest {
 /* // */
       {"//price", "r7.txt"},
       {"book-store//price", "r8.txt"},
-/* integer number as array index */
+/* integer number as an array index */
       {"/book-store/3/book/author/*", "r5.txt"},
+/* integer number as an object property index */
+      {"/book-store/*/book/1", "r2.txt"},
       {"/book-store/*/book[price ge 8]", "r6.txt"},
 /* axis */
       {"/book-store/2/book/author/ancestor-or-self::.", "r12.txt"},

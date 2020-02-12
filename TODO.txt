@@ -3,6 +3,7 @@
 + 3. matchTemplate and $template.$match have to use composed path like: book/author/name
 4. check: if all nodes cloned from source during transformation?
 5. new tests for 1 and 3
-6. getValue for Float and Double -> casting?
-7. JPath integer index for JObject node -> f.e. take 1st child.
-8. Add name-of for transformation to select not value but key of value.
++ 6. getValue for Float and Double -> casting?
++ 7. JPath integer index for JObject node -> f.e. take 1st child.
++ 8. Add key-of for transformation to select not value but key of value.
+9. Add exception for all null or default cases.

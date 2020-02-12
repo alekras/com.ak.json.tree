@@ -146,20 +146,28 @@ public final class JPath {
 
 			default :
 				for (JNode axisNode : axisNodes) {
+					int idx = 0;
 					switch (axisNode.getType()) {
-					case OBJECT :  // segment is an node name
-						JNode node = axisNode.getNode(segment);
+					case OBJECT :  // segment is an node name or int index in object
+						JNode node = null;
+						if (segment.matches(integerPattern)) {
+							idx = Integer.parseInt(segment);
+							node = axisNode.getChildren().get(idx);
+						} else {
+							node = axisNode.getNode(segment);
+						}
 						if (node != null) {
 							jpath(selectedNodes, step.pred, nextPath, node, var);
 						}
 						break;
 
 					case ARRAY :  // segment is an index of array
-						int idx = 0;
 						try {
 							idx = Integer.parseInt(segment);
 							JNode jnode = axisNode.getNode(idx);
-							jpath(selectedNodes, step.pred, nextPath, jnode, var);
+							if (jnode != null) {
+								jpath(selectedNodes, step.pred, nextPath, jnode, var);
+							}
 						} catch (NumberFormatException nfe) {
 							// wrong path !!!
 						}
@@ -435,7 +443,7 @@ public final class JPath {
 		return false;
 	}
 
-	private static Double convert2Double(Object v) {
+	private static Double convert2Double(final Object v) {
 		if (v instanceof Integer) {
 			return new Double(((Integer) v).doubleValue());
 		} else if (v instanceof Float) {

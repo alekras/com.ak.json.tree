@@ -17,6 +17,7 @@
 
 package com.ak.json.transform;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -128,20 +129,115 @@ public class JParserDebugTest {
 
 	@Test
 	public void testValueNode() {
-		JNode valueNode = new JValueNode(true);
+		JNode valueNode = new JValueNode<Boolean>(true);
 		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", true, valueNode.getValue(Boolean.class));
 		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "true", valueNode.getValue(String.class));
 		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", null, valueNode.getValue(Integer.class));
 		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", null, valueNode.getValue(Long.class));
 		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", null, valueNode.getValue(Float.class));
 		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", null, valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
 
-		System.err.println("1) " + valueNode.getType());
-		System.err.println("2) " + valueNode.getValue());
-		System.err.println("3) " + valueNode.getValue().getClass());
+		valueNode = new JValueNode<String>("string");
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", false, valueNode.getValue(Boolean.class));
+		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "string", valueNode.getValue(String.class));
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", null, valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", null, valueNode.getValue(Long.class));
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", null, valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", null, valueNode.getValue(Double.class));
+		valueNode = new JValueNode<String>("true");
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", true, valueNode.getValue(Boolean.class));
+		valueNode = new JValueNode<String>("1");
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", new Integer(1), valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", new Long(1), valueNode.getValue(Long.class));
+		valueNode = new JValueNode<String>("1.0");
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", new Float(1.0f), valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", new Double(1.0), valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
 
-		Class<Float> klass = Float.class;
-		System.err.println("4) " + klass.getSimpleName() + "; ");
+		valueNode = new JValueNode<Integer>(15);
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", null, valueNode.getValue(Boolean.class));
+		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "15", valueNode.getValue(String.class));
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", new Integer(15), valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", new Long(15), valueNode.getValue(Long.class));
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", new Float(15), valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", new Double(15), valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
+
+		valueNode = new JValueNode<Long>(16l);
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", null, valueNode.getValue(Boolean.class));
+		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "16", valueNode.getValue(String.class));
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", new Integer(16), valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", new Long(16l), valueNode.getValue(Long.class));
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", new Float(16), valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", new Double(16), valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
+
+		valueNode = new JValueNode<Float>(16.2f);
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", null, valueNode.getValue(Boolean.class));
+		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "16.2", valueNode.getValue(String.class));
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", new Integer(16), valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", new Long(16l), valueNode.getValue(Long.class));
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", new Float(16.2f), valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", new Double(16.200000762939453), valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
+
+		valueNode = new JValueNode<Double>(18.2);
+		System.out.println("Boolean) " + valueNode.getValue(Boolean.class));
+		assertEquals("", null, valueNode.getValue(Boolean.class));
+		System.out.println("String ) " + valueNode.getValue(String.class));
+		assertEquals("", "18.2", valueNode.getValue(String.class));
+		System.out.println("Integer) " + valueNode.getValue(Integer.class));
+		assertEquals("", new Integer(18), valueNode.getValue(Integer.class));
+		System.out.println("Long   ) " + valueNode.getValue(Long.class));
+		assertEquals("", new Long(18l), valueNode.getValue(Long.class));
+		System.out.println("Float  ) " + valueNode.getValue(Float.class));
+		assertEquals("", new Float(18.2f), valueNode.getValue(Float.class));
+		System.out.println("Double ) " + valueNode.getValue(Double.class));
+		assertEquals("", new Double(18.2), valueNode.getValue(Double.class));
+		System.out.println(" -------------- ");
+
+//		System.err.println("1) " + valueNode.getType());
+//		System.err.println("2) " + valueNode.getValue());
+//		System.err.println("3) " + valueNode.getValue().getClass());
+//
+//		Class<Float> klass = Float.class;
+//		System.err.println("4) " + klass.getSimpleName() + "; ");
 	}
 
 }

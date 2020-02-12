@@ -49,8 +49,9 @@ public class JTransformerTest {
   public static void setUpBeforeClass() {
     fileList = new String [][] {
 //        {"src/test/resources/1/source.json", "src/test/resources/1/template.json", "src/test/resources/1/result.json"},
-        {"src/test/resources/2/source.json", "src/test/resources/2/template.json", "src/test/resources/2/result.json"},
-        {"src/test/resources/3/source.json", "src/test/resources/3/template.json", "src/test/resources/3/result.json"}
+//        {"src/test/resources/2/source.json", "src/test/resources/2/template.json", "src/test/resources/2/result.json"},
+//        {"src/test/resources/3/source.json", "src/test/resources/3/template.json", "src/test/resources/3/result.json"},
+        {"src/test/resources/4/source.json", "src/test/resources/4/template.json", "src/test/resources/4/result.json"}
       };
   }
 

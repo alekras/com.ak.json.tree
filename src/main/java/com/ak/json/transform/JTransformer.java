@@ -243,6 +243,23 @@ public class JTransformer {
     return null;
   }
 
+  private JNode keyOf(final JNode source, final JNode valueOf, final JNode var) {
+    List<JNode> list;
+    switch (valueOf.getType()) {
+      case OBJECT :
+        list = processSelectNode(source, valueOf, var);
+        if (list.size() == 0) {
+          return null; // TODO
+        } else {
+          String key = ((JInstrumentalNode) list.get(0)).getKey();
+        	return new JValueNode<String>(key);
+        }
+      //$CASES-OMITTED$
+      default:
+    }
+    return null;
+  }
+
   /**
    *
    * @param source document to apply template
@@ -287,10 +304,15 @@ public class JTransformer {
             if (tempNode != null) {
               result = copyOf(source, tempNode, var);
             } else {
+            	tempNode = value.getNode("$key-of");
+            	if (tempNode != null) {
+            		result = keyOf(source, tempNode, var);
+            	} else {
               result = new JObjectNode();
               for (JNode nd : value) {
                 result.addNode(generateContent(source, nd, var));
               }
+            	}
             }
           }
         }

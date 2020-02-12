@@ -1,0 +1,16 @@
+[
+  {
+    "$template" : {
+      "$match" : "/", 
+      "$value" : {
+        "titles" : {"$apply-template" : {"$select" : "/book-store/*/0/author"}}
+      }
+    }
+  },
+  {
+    "$template" : {
+      "$match" : "author",
+      "$value" : {"$key-of" : {"$select" : ".."}}
+    }
+  }
+]
