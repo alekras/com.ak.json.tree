@@ -7,3 +7,6 @@
 + 7. JPath integer index for JObject node -> f.e. take 1st child.
 + 8. Add key-of for transformation to select not value but key of value.
 9. Add exception for all null or default cases.
+10. .addNode have to return reference to instance but not void. Useful while doing chain of adds...
+11. Implement add of node list to array (maybe object) nodes.
+ 

@@ -12,7 +12,7 @@ You can set up this framework as dependency for your own project.
 
   2. dependency (inside ivy.xml) :
   
-  <dependency org="com.ak" name="jsontree" rev="1.0.0" />
+  <dependency org="com.ak" name="jsontree" rev="1.0.3" />
 
   3. example (template) of ivy.xml for your project depended on jsontree JAR :
 
@@ -27,7 +27,7 @@ You can set up this framework as dependency for your own project.
   </info>
 
   <dependencies>
-    <dependency org="com.ak" name="jsontree" rev="1.0.0" transitive="false" />
+    <dependency org="com.ak" name="jsontree" rev="1.0.3" transitive="false" />
   </dependencies>
 </ivy-module>
 
@@ -50,7 +50,7 @@ You can set up this framework as dependency for your own project.
     <dependency>
       <groupId>com.ak</groupId>
       <artifactId>jsontree</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
     </dependency>
 
   3. example (template) of pom.xml for your project depended on jsontree JAR :
@@ -68,7 +68,7 @@ You can set up this framework as dependency for your own project.
     <dependency>
       <groupId>com.ak</groupId>
       <artifactId>jsontree</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>

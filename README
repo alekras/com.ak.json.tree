@@ -9,4 +9,7 @@ version 1.0.1
 version 1.0.2
 - bug fixed, code refactoring.
 
+version 1.0.3
+- bug fixed, improving JValue code types cast, improving transformation.
+
 See doc folder for documentation or visit http://jsonnodetree.sourceforge.net/ web site.
